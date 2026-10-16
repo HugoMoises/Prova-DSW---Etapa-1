@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %} {{modalidade.nome}} {% endblock %}
+{% block content %}
+    <main class="conteudo">
+        <nav class="trilha"><a href="{% url 'index' %}">Equipes</a> / {{modalidade.nome}}</nav>
+
+        <header class="topo">
+            <span class="sobretitulo">Modalidade</span>
+            <h1>{{modalidade.nome}}</h1>
+        </header>
+
+        <dl class="numeros">
+            <div>
+                <dt>Tipo</dt>
+                <dd>{{modalidade.tipo}}</dd>
+            </div>
+            <div>
+                <dt>Máximo por equipe</dt>
+                <dd>{{modalidade.max_atletas}}</dd>
+            </div>
+            <div>
+                <dt>Atletas inscritos</dt>
+                <dd>{{modalidade.atleta.count}}</dd>
+            </div>
+        </dl>
+
+        <h2>Atletas inscritos</h2>
+        <div class="tabela">
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Equipe</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for atleta in modalidade.atleta.all %}
+                        <tr>
+                            <td>{{atleta.nome}}</td>
+                            <td>
+                                <a href="{% url 'equipe' atleta.equipe.id %}">{{atleta.equipe}}</a>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr><td class="vazio" colspan="2">Nenhum atleta inscrito nesta modalidade.</td></tr>
+                        
+                    {% endfor %}
+                    
+                    <!-- Quando a modalidade não tiver atletas, a tabela deve ter apenas esta linha: -->
+                    <!-- <tr><td class="vazio" colspan="2">Nenhum atleta inscrito nesta modalidade.</td></tr> -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+{% endblock %}
