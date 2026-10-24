@@ -1,30 +1,25 @@
-from django.shortcuts import render, get_object_or_404
+from django.views.generic import ListView, DetailView
 from .models import Equipe, Modalidade
 
-def index(request):
-    equipes = Equipe.objects.all()
-    modalidades = Modalidade.objects.all()
 
-    context ={
-        "equipes": equipes,
-        "modalidades": modalidades
-    }
-    return render(request, 'jogos/index.html', context)
+class IndexView(ListView):
+    model = Equipe
+    template_name = 'jogos/index.html'
+    context_object_name = 'equipes'
 
-def equipe(request, id):
-    equipe = get_object_or_404(Equipe, pk=id)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['modalidades'] = Modalidade.objects.all()
+        return context
 
-    context = {
-        "equipe": equipe
-    }
 
-    return render(request, 'jogos/equipe.html', context)
+class EquipeDetailView(DetailView):
+    model = Equipe
+    template_name = 'jogos/equipe.html'
+    context_object_name = 'equipe'
 
-def modalidade(request, id):
-    modalidade = get_object_or_404(Modalidade, pk=id)
 
-    context = {
-        "modalidade": modalidade
-    }
-
-    return render(request, 'jogos/modalidade.html', context)
+class ModalidadeDetailView(DetailView):
+    model = Modalidade
+    template_name = 'jogos/modalidade.html'
+    context_object_name = 'modalidade'
