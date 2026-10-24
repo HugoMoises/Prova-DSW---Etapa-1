@@ -1,17 +1,21 @@
 const campoBusca = document.querySelector("#busca")
-const cards = document.querySelectorAll("#lista-equipes")
+const cards = document.querySelectorAll(".card")
 
 campoBusca.addEventListener("input", () => {
-    cards.forEach((card) => {
-        const nomeCard = card.querySelector(h3)
-        const textoNome = nomeCard.textContent.toLowerCase()
+    const texto = campoBusca.value.toLowerCase()
 
-        const encontrou = textoNome.includes(nomeCard)
+    cards.forEach((card) => {
+        const tituloCard = card.querySelector("h3")
+        const textoTitulo = tituloCard.textContent.toLowerCase()
+
+        const encontrou = textoTitulo.includes(texto)
 
         if (encontrou) {
-            cards.style.display = ""
-        } else{
-            cards.style.display = "none"
+            card.style.display = ""
+        } else {
+            card.style.display = "none"
         }
+
+        
     })
 })
