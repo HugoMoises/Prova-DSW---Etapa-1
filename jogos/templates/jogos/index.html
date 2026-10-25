@@ -15,13 +15,13 @@
                 <input type="search" id="busca" placeholder="Digite o nome da equipe">
             </div>
 
-            <button type="submit" id="adicionar-equipe" class="abrir-modal" data-modal="modal-equipe">
+            <button type="submit" class="abrir-modal" data-modal="modal-equipe">
                 Adicionar Equipe
             </button>
         </section>
         <section class="grade" id="lista-equipes">
             {% for equipe in equipes %}
-                <article class="card" style="border-top-color: #d97706;">
+                <article class="card" style="border-top-color: {{ equipe.cor }};">
                     <h3>{{equipe.nome}}</h3>
                     <dl>
                         <dt>Curso</dt>
@@ -40,7 +40,7 @@
 
             {% endfor %}
         </section>
-        {% include 'jogos/partials/equipe_form.html' %}
+        {% include 'jogos/partials/equipe_form_modal.html' %}
 
         <p class="sem-resultado" id="sem-resultado" hidden>Nenhuma equipe encontrada.</p>
 

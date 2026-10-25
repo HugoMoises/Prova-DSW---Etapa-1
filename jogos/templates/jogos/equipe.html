@@ -1,13 +1,17 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %} {{equipe.nome}} {% endblock %}
 {% block content %}
     <main class="conteudo">
         <nav class="trilha"><a href="{% url 'index' %}">Equipes</a> / {{equipe.nome}}</nav>
 
         <header class="topo">
-            <span class="sobretitulo">Equipe</span>
-            <h1>{{equipe.nome}}</h1>
-            <p class="descricao">{{equipe.curso }} · {{equipe.atletas.count}} atleta(s)</p>
+            <div>
+                <span class="sobretitulo">Equipe</span>
+                <h1>{{equipe.nome}}</h1>
+                <p class="descricao">{{equipe.curso }} · {{equipe.atletas.count}} atleta(s)</p>
+            </div>
+            <button class="abrir-modal" type="submit" data-modal="modal-equipe">Editar Equipe</button>
         </header>
 
         <h2>Técnico</h2>
@@ -58,11 +62,13 @@
                         <tr><td class="vazio" colspan="3">Nenhum atleta inscrito.</td></tr>
                     {% endfor %}
                     
-                    <!-- Quando a equipe não tiver atletas, a tabela deve ter apenas esta linha: -->
-                    <!-- <tr><td class="vazio" colspan="3">Nenhum atleta inscrito.</td></tr> -->
                 </tbody>
             </table>
 
         </div>
+        {% include "jogos/partials/equipe_edit_modal.html" %}
     </main>
+{% endblock %}
+{% block scripts %}
+    <script src="{% static "js/modal.js" %}"></script>
 {% endblock %}

@@ -1,8 +1,5 @@
 from django.db import models
 
-from django.db import models
-
-
 class Modalidade(models.Model):
     ESCOLHA_TIPO = {
     "coletiva": "coletiva",

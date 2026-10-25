@@ -1,0 +1,44 @@
+<dialog id="modal-equipe" class="modal">
+    <header class="modal-header">
+        <h2>Editar Equipe</h2>
+
+        <button class="fechar-modal" data-modal="modal-equipe" type="button">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </header>
+
+    <form method="post"" action="{% url "equipe-update" equipe.id %}"">
+        {% csrf_token %}
+
+        <fieldset>
+            <legend>Dados da equipe</legend>
+
+            <div class="campo">
+                {{ form.nome.label_tag }}
+                {{ form.nome }}
+                {{ form.nome.errors }}
+            </div>
+
+            <div class="campo">
+                {{ form.curso.label_tag }}
+                {{ form.curso }}
+                {{ form.curso.errors }}
+            </div>
+
+            <div class="campo">
+                {{ form.cor.label_tag }}
+                {{ form.cor }}
+                {{ form.cor.errors }}
+            </div>
+        </fieldset>
+
+        <footer class="modal-acoes">
+            <button class="cancelar-modal" data-modal="modal-equipe" type="button">
+                Cancelar
+            </button>
+            <button type="submit">
+                Salvar Alterações
+            </button>
+        </footer>
+    </form>
+</dialog>
