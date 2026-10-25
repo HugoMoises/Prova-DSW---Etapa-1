@@ -7,13 +7,18 @@
             <span class="sobretitulo">Jogos Interclasses 2026</span>
             <h1>Equipes inscritas</h1>
             <p class="descricao">Conheça as equipes que disputam os Jogos Interclasses do campus.</p>
+            
         </header>
+        <section class="acoes">
+            <div class="busca">
+                <label for="busca">Buscar equipe</label>
+                <input type="search" id="busca" placeholder="Digite o nome da equipe">
+            </div>
 
-        <div class="busca">
-            <label for="busca">Buscar equipe</label>
-            <input type="search" id="busca" placeholder="Digite o nome da equipe">
-        </div>
-
+            <button type="submit" id="adicionar-equipe" class="abrir-modal" data-modal="modal-equipe">
+                Adicionar Equipe
+            </button>
+        </section>
         <section class="grade" id="lista-equipes">
             {% for equipe in equipes %}
                 <article class="card" style="border-top-color: #d97706;">
@@ -35,6 +40,7 @@
 
             {% endfor %}
         </section>
+        {% include 'jogos/partials/equipe_form.html' %}
 
         <p class="sem-resultado" id="sem-resultado" hidden>Nenhuma equipe encontrada.</p>
 
@@ -48,4 +54,5 @@
 {% endblock %}
 {% block scripts %}
     <script src="{% static 'js/index.js' %}"></script>
+    <script src="{% static 'js/modal.js' %}"></script>
 {% endblock %}
